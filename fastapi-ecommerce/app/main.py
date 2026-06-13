@@ -39,3 +39,11 @@ def list_products(
         "items": products
     }
 
+@app.get("/products/{product_id}")
+def get_product_by_id(product_id: str = Path(...,min_length=36,max_length=36, description="UUID of the products")):
+    products = get_all_products()
+    for product in products:
+        if product.get("id") == product_id:
+            return product
+    raise HTTPException(status_code=404, detail="Product not found!")
+    
