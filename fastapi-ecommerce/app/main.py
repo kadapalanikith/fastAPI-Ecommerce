@@ -1,9 +1,7 @@
-from email.policy import default
-
-from sympy import limit
-
-from fastapi import FastAPI,HTTPException,Query
+from fastapi import FastAPI,HTTPException,Query,Path
 from app.services.products import get_all_products 
+
+from schema.product import Product
 
 app = FastAPI()
 
@@ -47,3 +45,7 @@ def get_product_by_id(product_id: str = Path(...,min_length=36,max_length=36, de
             return product
     raise HTTPException(status_code=404, detail="Product not found!")
     
+
+@app.post("/products",status_code=201)
+def create_product(product: Product):
+    return product
