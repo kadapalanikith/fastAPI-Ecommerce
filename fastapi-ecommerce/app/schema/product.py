@@ -1,5 +1,5 @@
-from pydantic import BaseModel,Field,field_validator,model_validator,computed_field
-from typing import Annotated,Literal
+from pydantic import BaseModel,Field,field_validator,model_validator,computed_field,EmailStr,AnyUrl
+from typing import Annotated,Literal,Optional
 from uuid import UUID
 from datetime import datetime
 
@@ -129,7 +129,7 @@ class Product(BaseModel):
         if "-" not in value:
             raise ValueError("SKU mut have '-")
         last = value.split('-')[-1]
-        if not (len(last) = 3 and last.isdigit()):
+        if not (len(last) == 3 and last.isdigit()):
             raise ValueError("SKU must end with a 3 digit sequence like -234")
         return value
     

@@ -1,7 +1,7 @@
 from fastapi import FastAPI,HTTPException,Query,Path
 from app.services.products import get_all_products 
 
-from schema.product import Product
+from app.schema.product import Product
 
 app = FastAPI()
 
